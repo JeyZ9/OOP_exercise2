@@ -56,7 +56,8 @@ class Invoice {
     }
     getAmountAfterDiscount() {
         const discount = this.amount * (this.getCustomerDiscount() / 100);
-        return discount;
+        const cal = this.amount - discount;
+        return cal;
     }
     toString() {
         return `Invoice[id=${this.id}, customer=${this.customer.toString()}, amount=${this.amount}]`;

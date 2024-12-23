@@ -75,7 +75,8 @@ export class Invoice {
 
     public getAmountAfterDiscount():number {
         const discount = this.amount * (this.getCustomerDiscount() / 100);
-        return discount;
+        const cal = this.amount - discount;
+        return cal;
     }
 
     public toString():string {
