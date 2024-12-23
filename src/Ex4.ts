@@ -33,7 +33,7 @@ export class Circle extends Shap {
     
     constructor(radius:number, color:string, filled:boolean){
         super(color, filled);
-        this.radius = radius;
+        this.radius = radius ?? 1.0;
     }
 
     public getRadius():number {
@@ -55,7 +55,7 @@ export class Circle extends Shap {
     }
 
     public toString():string {
-        return `Circle[Shape[color=${this.getColor()}, filled=${this.isFilled()}], radius=${this.radius}]`
+        return `Circle[${super.toString()}, radius=${this.radius}]`
     }
 }
 
@@ -65,8 +65,8 @@ export class Rectangle extends Shap {
 
     constructor(width:number, length:number, color:string, filled:boolean){
         super(color, filled);
-        this.width = width;
-        this.length = length;
+        this.width = width ?? 1.0;
+        this.length = length ?? 1.0;
     }
 
     public getWidth():number {
@@ -86,10 +86,44 @@ export class Rectangle extends Shap {
     }
 
     public getArea():number {
-        return 0;
+        const area:number = this.width * this.length;
+        return area;
     }
 
     public getPerimeter():number {
-        return 0;
+        const perimeter:number = (this.width + this.length) * 2;
+        return perimeter;
     }
+
+    public toString():string {
+        return `Rectangle[${super.toString()}, width=${this.width}, length=${this.length}]`;
+    }
+}
+
+export class Square extends Rectangle {
+    constructor(side:number , color:string, filled:boolean){
+        super(side, side, color, filled);
+    }
+
+    public getSide():number {
+        return this.getWidth();
+    }
+
+    public setSide(side:number):void {
+        this.setWidth(side);
+        this.setLength(side);
+    }
+
+    public getArea():number {
+        return super.getArea();
+    }
+
+    public getPerimeter(): number {
+        return super.getPerimeter();
+    }
+
+    public toString(): string {
+        return `Square[${super.toString()}]`;
+    }
+
 }

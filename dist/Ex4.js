@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Rectangle = exports.Circle = exports.Shap = void 0;
+exports.Square = exports.Rectangle = exports.Circle = exports.Shap = void 0;
 class Shap {
     constructor(color, filled) {
         this.color = color !== null && color !== void 0 ? color : "red";
@@ -26,7 +26,7 @@ exports.Shap = Shap;
 class Circle extends Shap {
     constructor(radius, color, filled) {
         super(color, filled);
-        this.radius = radius;
+        this.radius = radius !== null && radius !== void 0 ? radius : 1.0;
     }
     getRadius() {
         return this.radius;
@@ -43,15 +43,15 @@ class Circle extends Shap {
         return perimeter;
     }
     toString() {
-        return `Circle[Shape[color=${this.getColor()}, filled=${this.isFilled()}], radius=${this.radius}]`;
+        return `Circle[${super.toString()}, radius=${this.radius}]`;
     }
 }
 exports.Circle = Circle;
 class Rectangle extends Shap {
     constructor(width, length, color, filled) {
         super(color, filled);
-        this.width = width;
-        this.length = length;
+        this.width = width !== null && width !== void 0 ? width : 1.0;
+        this.length = length !== null && length !== void 0 ? length : 1.0;
     }
     getWidth() {
         return this.width;
@@ -66,10 +66,37 @@ class Rectangle extends Shap {
         this.length = length;
     }
     getArea() {
-        return 0;
+        const area = this.width * this.length;
+        return area;
     }
     getPerimeter() {
-        return 0;
+        const perimeter = (this.width + this.length) * 2;
+        return perimeter;
+    }
+    toString() {
+        return `Rectangle[${super.toString()}, width=${this.width}, length=${this.length}]`;
     }
 }
 exports.Rectangle = Rectangle;
+class Square extends Rectangle {
+    constructor(side, color, filled) {
+        super(side, side, color, filled);
+    }
+    getSide() {
+        return this.getWidth();
+    }
+    setSide(side) {
+        this.setWidth(side);
+        this.setLength(side);
+    }
+    getArea() {
+        return super.getArea();
+    }
+    getPerimeter() {
+        return super.getPerimeter();
+    }
+    toString() {
+        return `Square[${super.toString()}]`;
+    }
+}
+exports.Square = Square;

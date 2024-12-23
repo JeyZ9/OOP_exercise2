@@ -61,7 +61,7 @@ export class Student extends Person {
     }
 
     public toString():string {
-        return `Student[Person[name=${this.getName()}, address=${this.getAddress()}], program=${this.program}, year=${this.year}, fee=${this.fee}]`;
+        return `Student[${super.toString()}, program=${this.program}, year=${this.year}, fee=${this.fee}]`;
     }
 }
 
@@ -92,7 +92,7 @@ export class Staff extends Person {
     }
 
     public toString():string {
-        return `Staff[Person[name=${this.getName()}, address=${this.getAddress()}], school=${this.school}, pay=${this.pay}]`
+        return `Staff[${super.toString()}, school=${this.school}, pay=${this.pay}]`
     }
 }
 
